@@ -19,7 +19,7 @@
     0 <= k <= arr.length <= 10000
     0 <= arr[i] <= 10000
 
-
+1. 堆排序
 
 ```python
 class Solution:
@@ -37,6 +37,44 @@ class Solution:
 
 
 
-Tips
+2. 快速排序
 
-大根堆问题，因为python只有小根堆的数据结构，所以需要number取负数，保留K个最大的负数->k个最小的正数
+```python
+class Solution:
+    def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
+        def partition(nums, left, right):
+            key = left
+            while left<right:
+                while left<right and nums[right]>=nums[key]:
+                    right-=1
+                while left<right and nums[left]<=nums[key]:
+                    left+=1
+                nums[left], nums[right] = nums[right],nums[left]
+            nums[left],nums[key] =nums[key],nums[left]
+            return left
+
+        def quick_sort(nums, left, right):
+            if left>=right:
+                return
+            
+            mid = partition(nums, left, right)
+            if k<mid:
+                quick_sort(nums, left, mid - 1)
+            else:
+                quick_sort(arr, mid + 1, right)
+
+        l = len(arr)
+        if k>l:
+            return arr
+        quick_sort(arr, 0, l-1)
+        return arr[:k]
+```
+
+
+
+快速排序解法
+
+1. 注意partition过程中，保证右边是>=key， 左边是<=key，且左右是不对称的需要先遍历右边
+2. 在sort过程中，可以通过和k判断位置只对一半的位置进行排序
+3. 注意sort过程的停止条件，默认是left>=right，如果找k大的停止条件还有mid==k
+
