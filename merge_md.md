@@ -1,7 +1,10 @@
 ```
+import os
+from glob import glob
+
 dirs = os.listdir('/Users/lixiang.2533/Desktop/Blogs/Leetcode/')
 dir = '/Users/lixiang.2533/Desktop/Blogs/Leetcode'
-dirs = ['二分法']
+dirs = ['二分法','双指针','栈','排序','贪心']
 for a in dirs:
     md_list = glob(os.path.join(dir, a, '*.md'))
     md_list = sorted(md_list)
