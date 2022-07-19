@@ -1,2 +1,5 @@
+./script/leetcode/*
+.DS_Store
+.idea/
 ./Tmp/*
 Tmp
