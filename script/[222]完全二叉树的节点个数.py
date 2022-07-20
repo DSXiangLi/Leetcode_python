@@ -51,4 +51,21 @@
 #         self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
+        def dfs(root):
+            if not root:
+                return 0
+            lh = 0
+            rh = 0
+            left = root
+            right = root
+            while left:
+                left = left.left
+                lh +=1
+            while right:
+                right = right.right
+                rh+=1
+            if lh==rh:
+                return 2 ** lh - 1
+            return dfs(root.left) + dfs(root.right) +1
+        return dfs(root)
 # leetcode submit region end(Prohibit modification and deletion)

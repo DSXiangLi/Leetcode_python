@@ -43,5 +43,13 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        l = min(p.val, q.val)
+        r = max(p.val, q.val)
+        while root and (root.val<l or root.val>r):
+            if root.val<l:
+                root = root.right
+            else:
+                root = root.left
+        return root
         
 # leetcode submit region end(Prohibit modification and deletion)
