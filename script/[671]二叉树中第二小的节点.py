@@ -46,4 +46,19 @@
 #         self.right = right
 class Solution:
     def findSecondMinimumValue(self, root: TreeNode) -> int:
+        ans=-1
+        rootval = root.val
+        def dfs(root):
+            nonlocal rootval, ans
+            if not root:
+                return
+            if ans!=-1 and root.val > ans:
+                return
+            # elif不需要判断ans!=-1，因为ans有值也可以overwrite
+            elif root.val > rootval:
+                ans = root.val
+            dfs(root.left)
+            dfs(root.right)
+        dfs(root)
+        return ans
 # leetcode submit region end(Prohibit modification and deletion)

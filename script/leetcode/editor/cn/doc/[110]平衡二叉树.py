@@ -37,7 +37,7 @@
 #  树中的节点数在范围 [0, 5000] 内 
 #  -10⁴ <= Node.val <= 10⁴ 
 #  
-#  Related Topics 树 深度优先搜索 二叉树 👍 1079 👎 0
+#  Related Topics 树 深度优先搜索 二叉树 👍 1075 👎 0
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -49,21 +49,4 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
-        def dfs(root):
-            if not root:
-                return 0
-            left = dfs(root.left)
-            right = dfs(root.right)
-            if left ==-1 or right==-1:
-                return -1
-            elif abs(right-left)>1:
-                return -1
-            else:
-                return max(left,right)+1
-        result = dfs(root)
-        if result==-1:
-            return False
-        else:
-            return True
-
 # leetcode submit region end(Prohibit modification and deletion)

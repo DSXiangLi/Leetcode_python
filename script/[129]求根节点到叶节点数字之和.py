@@ -58,4 +58,17 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
+        total = 0
+        def dfs(root, path):
+            nonlocal total
+            if not root.left and not root.right:
+                path = 10*path + root.val
+                total+=path
+                return
+            if root.left:
+                dfs(root.left, 10*path+root.val)
+            if root.right:
+                dfs(root.right, 10*path+root.val)
+        dfs(root, 0)
+        return total
 # leetcode submit region end(Prohibit modification and deletion)

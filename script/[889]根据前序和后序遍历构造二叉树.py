@@ -46,4 +46,15 @@
 #         self.right = right
 class Solution:
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> TreeNode:
+        def helper(preorder, postorder):
+            if not preorder:
+                return None
+            if len(preorder)==1:
+                return TreeNode(preorder[0])
+            L = postorder.index(preorder[1])+1
+            root = TreeNode(preorder[0])
+            root.left = helper(preorder[1:(L+1)], postorder[:L])
+            root.right = helper(preorder[(L+1):], postorder[L:-1])
+            return root
+        return helper(preorder, postorder)
 # leetcode submit region end(Prohibit modification and deletion)

@@ -55,4 +55,16 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
+        pre = None
+        def dfs(root):
+            nonlocal pre
+            if not root:
+                return None
+            dfs(root.right)
+            dfs(root.left)
+            root.left = None
+            root.right= pre
+            pre = root
+        dfs(root)
+        return pre
 # leetcode submit region end(Prohibit modification and deletion)

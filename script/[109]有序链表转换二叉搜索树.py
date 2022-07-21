@@ -29,7 +29,7 @@
 #  head 中的节点数在[0, 2 * 10⁴] 范围内 
 #  -10⁵ <= Node.val <= 10⁵ 
 #  
-#  Related Topics 树 二叉搜索树 链表 分治 二叉树 👍 729 👎 0
+#  Related Topics 树 二叉搜索树 链表 分治 二叉树 👍 730 👎 0
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -46,4 +46,23 @@
 #         self.right = right
 class Solution:
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def dfs(start, end):
+            nonlocal head
+            if start>end:
+                return None
+            mid = (start+end)//2
+
+            left= dfs(start, mid-1)
+            root = TreeNode(head.val)
+            head = head.next
+            right = dfs(mid+1, end)
+            root.left = left
+            root.right = right
+            return root
+        counter = 0
+        cur = head
+        while cur:
+            cur = cur.next
+            counter+=1
+        return dfs(1, counter)
 # leetcode submit region end(Prohibit modification and deletion)

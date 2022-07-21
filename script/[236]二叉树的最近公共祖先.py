@@ -39,7 +39,7 @@
 #  p != q 
 #  p 和 q 均存在于给定的二叉树中。 
 #  
-#  Related Topics 树 深度优先搜索 二叉树 👍 1850 👎 0
+#  Related Topics 树 深度优先搜索 二叉树 👍 1854 👎 0
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -52,5 +52,20 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        def dfs(root):
+            #返回的是节点
+            if not root:
+                return None
+            if root==p or root==q:
+                return root
+            left = dfs(root.left)
+            right =dfs(root.right)
+            if left and right:
+                return root
+            elif left:
+                return left
+            else:
+                return right
+        return dfs(root)
         
 # leetcode submit region end(Prohibit modification and deletion)

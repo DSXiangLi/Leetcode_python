@@ -43,6 +43,24 @@
 #         self.right = right
 class Solution:
     def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:
-        maxl = 0
-        def
+        #注意这里需要变量，因为遍历过程中depth会被重制
+        ans =0
+        def dfs(root):
+            nonlocal ans
+            if not root:
+                return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            lh, rh = 0,0
+            if root.left and root.val == root.left.val:
+                lh = left+1
+            if root.right and root.val ==root.right.val:
+                rh = right+1
+            ans = max(ans, lh+rh)
+            return max(lh, rh)
+        dfs(root)
+        return ans
+
+
+
 # leetcode submit region end(Prohibit modification and deletion)

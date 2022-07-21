@@ -51,4 +51,15 @@
 #         self.right = right
 class Solution:
     def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        def dfs(root):
+            if not root:
+                return TreeNode(val)
+            if root.val < val:
+                root.right = dfs(root.right)
+            if root.val > val:
+                root.left = dfs(root.left )
+            return root
+
+        return dfs(root)
+
 # leetcode submit region end(Prohibit modification and deletion)
