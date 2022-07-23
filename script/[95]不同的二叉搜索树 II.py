@@ -27,7 +27,8 @@
 #  
 #  
 #  
-#  Related Topics 树 二叉搜索树 动态规划 回溯 二叉树 👍 1259 👎 0
+#  Related Topics 树 二叉搜索树 动态规划 回溯 二叉树 
+#  👍 1262 👎 0
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -39,5 +40,29 @@
 #         self.right = right
 class Solution:
     def generateTrees(self, n: int) -> List[TreeNode]:
-        def helper()
+        if n<0:
+            return []
+        hash = dict()
+
+        def inorder(start,end):
+            nonlocal hash
+            if (start,end) in hash:
+                return hash[(start,end)]
+            if start>end:
+                return [None]
+            sub = []
+            for i in range(start, end+1):
+                for left in inorder(start, i-1):
+                    for right in inorder(i+1, end):
+                        root = TreeNode(i)
+                        root.left = left
+                        root.right = right
+                        sub.append(root)
+            hash[(start,end)] = sub
+            return sub
+        return inorder(1, n)
+
+
+
+
 # leetcode submit region end(Prohibit modification and deletion)
