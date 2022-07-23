@@ -27,10 +27,11 @@
 #  提示： 
 # 
 #  
-#  树中节点数目范围是 [1, 3 * 10⁴] 
+#  树中节点数目范围是 [1, 3 * 104] 
 #  -1000 <= Node.val <= 1000 
 #  
-#  Related Topics 树 深度优先搜索 动态规划 二叉树 👍 1657 👎 0
+#  Related Topics 树 深度优先搜索 动态规划 二叉树 
+#  👍 1663 👎 0
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
@@ -42,4 +43,16 @@
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        maxpath = -2**31
+
+        def dfs(root):
+            nonlocal maxpath
+            if not root:
+                return 0
+            left = max(dfs(root.left),0)
+            right = max(dfs(root.right),0)
+            maxpath = max(left+right+root.val, maxpath)
+            return max(left, right) + root.val
+        dfs(root)
+        return maxpath
 # leetcode submit region end(Prohibit modification and deletion)
