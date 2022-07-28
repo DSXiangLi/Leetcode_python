@@ -46,4 +46,15 @@
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def numRollsToTarget(self, n: int, k: int, target: int) -> int:
+        dp = [[0] * (target+1) for i in range(n+1)]
+        dp[0][0]=1
+        for i in range(1,n+1):
+            for t in range(1, target+1):
+                for j in range(1, min(t,k)+1):
+                    dp[i][t] += dp[i-1][t-j]
+                    dp[i][t] %= 1000000007
+        return dp[-1][-1]
+
+
+
 # leetcode submit region end(Prohibit modification and deletion)
