@@ -55,7 +55,7 @@ class Solution:
                 return
             if not root.left and not root.right:
                 ans.append(root.val)
-                return ans
+                return
             seralize(root.left, ans)
             seralize(root.right, ans)
             return ans
